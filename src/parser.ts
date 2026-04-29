@@ -20,8 +20,7 @@ const PLUGINS: ParserPlugin[] = [
   'topLevelAwait',
 ];
 
-export function codeToAST(code: string, options: ParseOptions = {}): ParseResult {
-  const { filePath: _filePath = 'unknown' } = options;
+export function codeToAST(code: string, _options: ParseOptions = {}): ParseResult {
 
   try {
     const ast = parse(code, {

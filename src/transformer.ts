@@ -4,6 +4,7 @@ import type { File } from '@babel/types';
 import { guessType, extractJSDocTypes } from './analyzer';
 
 const MONGOOSE_METHODS = new Set(['Schema', 'model', 'models']);
+const CAST_METHODS = new Set(['get', 'findOne', 'find', 'findOneAndUpdate', 'findOneAndDelete']);
 
 export function injectTypes(ast: File): File {
   traverse(ast, {
@@ -25,7 +26,6 @@ export function injectTypes(ast: File): File {
       }
 
       if (!t.isIdentifier(id) || id.typeAnnotation || !init) return;
-      if (t.isObjectPattern(id) || t.isArrayPattern(id)) return;
       if (t.isCallExpression(init) && t.isIdentifier(init.callee, { name: 'require' })) return;
       if (isMongooseExpression(init)) return;
       if (t.isNewExpression(init) && isMemberCall(init.callee, 'mongoose', 'Schema')) return;
@@ -139,8 +139,7 @@ export function injectTypes(ast: File): File {
         t.isMemberExpression(path.node.callee) &&
         t.isIdentifier(path.node.callee.property)
       ) {
-        const castMethods = new Set(['get', 'findOne', 'find', 'findOneAndUpdate', 'findOneAndDelete']);
-        if (castMethods.has(path.node.callee.property.name)) {
+        if (CAST_METHODS.has(path.node.callee.property.name)) {
           if (!t.isTSAsExpression(path.parentPath.node)) {
             path.replaceWith(t.tsAsExpression(path.node, t.tsAnyKeyword()));
             path.skip();

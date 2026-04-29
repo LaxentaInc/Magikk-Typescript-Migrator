@@ -4,7 +4,7 @@ import { codeToAST } from './parser';
 import { convertModuleSystem } from './converter';
 import { injectTypes } from './transformer';
 import { astToCode } from './generator';
-import type { MigrationResult, MigrationReport, MigrationStatus } from './types';
+import type { MigrationResult, MigrationReport } from './types';
 
 const C = {
   reset:   '\x1b[0m',
@@ -189,9 +189,11 @@ function migrateFile(filePath: string, backupDir: string): MigrationResult {
 function run(): void {
   console.log(BANNER);
 
-  const targetDir = path.resolve(__dirname, '../../src');
-  const backupDir = path.resolve(__dirname, '../backups', new Date().toISOString().replace(/[:.]/g, '-'));
-  const reportPath = path.resolve(__dirname, '../migration-report.json');
+  // resolve project root — works from both dist/ (compiled) and src/ (ts-node)
+  const projectRoot = path.resolve(__dirname, __dirname.includes('dist') ? '../..' : '..');
+  const targetDir = path.resolve(projectRoot, 'src');
+  const backupDir = path.resolve(projectRoot, 'magikk-migrator/backups', new Date().toISOString().replace(/[:.]/g, '-'));
+  const reportPath = path.resolve(projectRoot, 'magikk-migrator/migration-report.json');
 
   LOG.info(`target: ${C.bold}${targetDir}${C.reset}`);
   LOG.info(`backups: ${C.bold}${backupDir}${C.reset}`);

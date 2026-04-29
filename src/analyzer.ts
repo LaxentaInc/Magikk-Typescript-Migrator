@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import type { Expression, Node, TSType, Comment } from '@babel/types';
+import type { Expression, TSType, Comment } from '@babel/types';
 import type { JSDocInfo } from './types';
 
 // core type inference from an ast node
@@ -69,6 +69,10 @@ export function guessType(node: Expression | null | undefined): TSType | null {
 
 const MATH_OPS = new Set(['+', '-', '*', '/', '%', '**', '|', '&', '^', '<<', '>>', '>>>']);
 const BOOL_OPS = new Set(['===', '!==', '==', '!=', '<', '>', '<=', '>=', 'instanceof', 'in']);
+
+const ARRAY_RETURN_METHODS = new Set(['filter', 'map', 'slice', 'concat', 'flat', 'flatMap', 'sort', 'reverse']);
+const BOOL_METHODS = new Set(['includes', 'some', 'every', 'has']);
+const NUM_METHODS = new Set(['indexOf', 'findIndex', 'push', 'unshift']);
 
 function guessBinaryType(node: t.BinaryExpression): TSType {
   if (BOOL_OPS.has(node.operator)) return t.tsBooleanKeyword();
@@ -155,17 +159,9 @@ export function guessCallExpressionType(node: t.CallExpression): TSType | null {
       // .join() -> string
       if (prop.name === 'join') return t.tsStringKeyword();
 
-      // array-like methods that return collections/arrays — use any to stay safe with discord.js
-      const arrayReturnMethods = new Set(['filter', 'map', 'slice', 'concat', 'flat', 'flatMap', 'sort', 'reverse']);
-      if (arrayReturnMethods.has(prop.name)) return t.tsAnyKeyword();
-
-      // boolean methods
-      const boolMethods = new Set(['includes', 'some', 'every', 'has']);
-      if (boolMethods.has(prop.name)) return t.tsBooleanKeyword();
-
-      // number methods
-      const numMethods = new Set(['indexOf', 'findIndex', 'push', 'unshift']);
-      if (numMethods.has(prop.name)) return t.tsNumberKeyword();
+      if (ARRAY_RETURN_METHODS.has(prop.name)) return t.tsAnyKeyword();
+      if (BOOL_METHODS.has(prop.name)) return t.tsBooleanKeyword();
+      if (NUM_METHODS.has(prop.name)) return t.tsNumberKeyword();
 
       if (prop.name === 'find') return t.tsAnyKeyword();
     }
