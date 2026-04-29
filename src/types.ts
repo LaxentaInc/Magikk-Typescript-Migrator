@@ -23,7 +23,6 @@ export interface MigrationResult {
   status: MigrationStatus;
   errors: string[];
   warnings: string[];
-  stats: { typesInjected: number };
 }
 
 export type MigrationStatus =
