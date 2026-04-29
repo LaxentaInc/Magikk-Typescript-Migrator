@@ -190,9 +190,6 @@ export function guessPropertyAccessType(node: t.MemberExpression): TSType {
     return t.tsNumberKeyword();
   }
 
-  // .id on discord objects is always a snowflake string
-  if (t.isIdentifier(node.property, { name: 'id' })) return t.tsStringKeyword();
-
   return t.tsAnyKeyword();
 }
 
@@ -258,7 +255,7 @@ export function jsdocTypeToTSType(jsdocType: string): TSType {
   return t.tsTypeReference(t.identifier(cleaned));
 }
 
-// structural equality check for ts type nodes
+// structural equality check for ts type nodes, including generic parameters
 export function typesMatch(a: TSType | null, b: TSType | null): boolean {
   if (!a || !b) return false;
   if (a.type !== b.type) return false;
@@ -267,12 +264,25 @@ export function typesMatch(a: TSType | null, b: TSType | null): boolean {
 
   if (t.isTSTypeReference(a) && t.isTSTypeReference(b)) {
     if (t.isIdentifier(a.typeName) && t.isIdentifier(b.typeName)) {
-      return a.typeName.name === b.typeName.name;
+      if (a.typeName.name !== b.typeName.name) return false;
+    } else {
+      return false;
     }
+
+    // compare generic type parameters
+    const aParams = a.typeParameters?.params || [];
+    const bParams = b.typeParameters?.params || [];
+    if (aParams.length !== bParams.length) return false;
+    return aParams.every((p, i) => typesMatch(p, bParams[i]));
   }
 
   if (t.isTSArrayType(a) && t.isTSArrayType(b)) {
     return typesMatch(a.elementType, b.elementType);
+  }
+
+  if (t.isTSUnionType(a) && t.isTSUnionType(b)) {
+    if (a.types.length !== b.types.length) return false;
+    return a.types.every((at, i) => typesMatch(at, b.types[i]));
   }
 
   return false;
