@@ -10,7 +10,7 @@ export function injectTypes(ast: File): File {
     VariableDeclarator(path) {
       const { id, init } = path.node;
 
-      // mongoose model guard — wrap in `as any` to prevent union callable errors
+      // mongoose model guard ;wrap in `as any` to prevent union callable errors
       if (init && t.isLogicalExpression(init, { operator: '||' })) {
         const right = init.right;
         if (
@@ -86,7 +86,7 @@ export function injectTypes(ast: File): File {
           return;
         }
 
-        // destructured params — skip, too risky
+        // destructured params skip, too risky
         if (t.isObjectPattern(param) || t.isArrayPattern(param)) return;
 
         // simple identifier params
@@ -124,7 +124,7 @@ export function injectTypes(ast: File): File {
     },
 
     CallExpression(path) {
-      // discord.js addFields — cast inline objects to any
+      // discord.js addFields:cast inline objects to any
       if (
         t.isMemberExpression(path.node.callee) &&
         t.isIdentifier(path.node.callee.property, { name: 'addFields' })

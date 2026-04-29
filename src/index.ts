@@ -236,7 +236,7 @@ function run(): void {
   LOG.info(`  ${C.green}✓ migrated:${C.reset} ${migrated}`);
   LOG.info(`  ${C.yellow}⚠ skipped:${C.reset}  ${skipped}`);
   LOG.info(`  ${C.red}✗ errors:${C.reset}   ${errors}`);
-  LOG.info(`  📦 backups:  ${backupDir}`);
+  LOG.info(`  backups:  ${backupDir}`);
 
   try {
     const report: MigrationReport = {
@@ -248,7 +248,7 @@ function run(): void {
       files: results,
     };
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    LOG.info(`  📋 report:   ${reportPath}`);
+    LOG.info(`  report:   ${reportPath}`);
   } catch (err: any) {
     LOG.warn(`failed to save report: ${err.message}`);
   }
