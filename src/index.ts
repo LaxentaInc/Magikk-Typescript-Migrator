@@ -32,12 +32,12 @@ ${C.magenta}${C.bold}
 ${C.reset}`;
 
 const LOG = {
-  info:    (...args: any[]) => console.log(`${C.cyan}[INFO]${C.reset}`, ...args),
-  success: (...args: any[]) => console.log(`${C.green}[✓]${C.reset}`, ...args),
-  warn:    (...args: any[]) => console.log(`${C.yellow}[⚠]${C.reset}`, ...args),
-  error:   (...args: any[]) => console.log(`${C.red}[✗]${C.reset}`, ...args),
-  step:    (...args: any[]) => console.log(`${C.magenta}[→]${C.reset}`, ...args),
-  detail:  (...args: any[]) => console.log(`${C.dim}   ${C.reset}`, ...args),
+  info:    (...args: unknown[]) => console.log(`${C.cyan}[INFO]${C.reset}`, ...args),
+  success: (...args: unknown[]) => console.log(`${C.green}[✓]${C.reset}`, ...args),
+  warn:    (...args: unknown[]) => console.log(`${C.yellow}[⚠]${C.reset}`, ...args),
+  error:   (...args: unknown[]) => console.log(`${C.red}[✗]${C.reset}`, ...args),
+  step:    (...args: unknown[]) => console.log(`${C.magenta}[→]${C.reset}`, ...args),
+  detail:  (...args: unknown[]) => console.log(`${C.dim}   ${C.reset}`, ...args),
 };
 
 const IGNORE_DIRS = new Set([
@@ -51,6 +51,38 @@ const IGNORE_FILES = new Set([
   'webpack.config.js', 'rollup.config.js', 'vite.config.js',
   'tailwind.config.js', 'postcss.config.js', 'next.config.js',
 ]);
+
+interface CliArgs {
+  target: string;
+  dryRun: boolean;
+}
+
+function parseArgs(): CliArgs {
+  const args = process.argv.slice(2);
+  let target = '';
+  let dryRun = false;
+
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--target' && args[i + 1]) {
+      target = args[++i];
+    } else if (args[i] === '--dry-run') {
+      dryRun = true;
+    } else if (!args[i].startsWith('--')) {
+      target = args[i];
+    }
+  }
+
+  // resolve project root — check basename, not full path
+  const projectRoot = path.resolve(__dirname, path.basename(__dirname) === 'dist' ? '../..' : '..');
+
+  if (!target) {
+    target = path.resolve(projectRoot, 'src');
+  } else {
+    target = path.resolve(target);
+  }
+
+  return { target, dryRun };
+}
 
 function walkSync(dir: string, filelist: string[] = []): string[] {
   if (!fs.existsSync(dir)) return filelist;
@@ -68,7 +100,7 @@ function walkSync(dir: string, filelist: string[] = []): string[] {
   return filelist;
 }
 
-function migrateFile(filePath: string, backupDir: string): MigrationResult {
+function migrateFile(filePath: string, backupDir: string, dryRun: boolean): MigrationResult {
   const fileName = path.basename(filePath);
   const relativePath = path.relative(process.cwd(), filePath);
   const isJsx = filePath.endsWith('.jsx');
@@ -81,7 +113,6 @@ function migrateFile(filePath: string, backupDir: string): MigrationResult {
     status: 'unknown',
     errors: [],
     warnings: [],
-    stats: { typesInjected: 0 },
   };
 
   // skip if a non-empty ts file already exists
@@ -106,10 +137,11 @@ function migrateFile(filePath: string, backupDir: string): MigrationResult {
   let rawCode: string;
   try {
     rawCode = fs.readFileSync(filePath, 'utf-8');
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
     result.status = 'error-read';
-    result.errors.push(`failed to read: ${err.message}`);
-    LOG.error(`can't read ${fileName}: ${err.message}`);
+    result.errors.push(`failed to read: ${msg}`);
+    LOG.error(`can't read ${fileName}: ${msg}`);
     return result;
   }
 
@@ -118,9 +150,10 @@ function migrateFile(filePath: string, backupDir: string): MigrationResult {
     const backupPath = path.join(backupDir, relativePath);
     fs.mkdirSync(path.dirname(backupPath), { recursive: true });
     fs.copyFileSync(filePath, backupPath);
-  } catch (err: any) {
-    result.warnings.push(`backup failed: ${err.message}`);
-    LOG.warn(`backup failed for ${fileName}: ${err.message}`);
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    result.warnings.push(`backup failed: ${msg}`);
+    LOG.warn(`backup failed for ${fileName}: ${msg}`);
   }
 
   // step 1: parse
@@ -144,19 +177,21 @@ function migrateFile(filePath: string, backupDir: string): MigrationResult {
   LOG.step(`converting ${C.cyan}${fileName}${C.reset} module system`);
   try {
     convertModuleSystem(ast);
-  } catch (err: any) {
-    result.warnings.push(`module conversion warning: ${err.message}`);
-    LOG.warn(`module conversion issue in ${fileName}: ${err.message} (continuing)`);
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    result.warnings.push(`module conversion warning: ${msg}`);
+    LOG.warn(`module conversion issue in ${fileName}: ${msg} (continuing)`);
   }
 
   // step 3: inject types
   LOG.step(`transforming ${C.cyan}${fileName}${C.reset}`);
   try {
     injectTypes(ast);
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
     result.status = 'error-transform';
-    result.errors.push(`transform error: ${err.message}`);
-    LOG.error(`transform failed for ${fileName}: ${err.message}`);
+    result.errors.push(`transform error: ${msg}`);
+    LOG.error(`transform failed for ${fileName}: ${msg}`);
     return result;
   }
 
@@ -165,22 +200,30 @@ function migrateFile(filePath: string, backupDir: string): MigrationResult {
   let outputCode: string;
   try {
     outputCode = astToCode(ast);
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
     result.status = 'error-generate';
-    result.errors.push(`generator error: ${err.message}`);
-    LOG.error(`code generation failed for ${fileName}: ${err.message}`);
+    result.errors.push(`generator error: ${msg}`);
+    LOG.error(`code generation failed for ${fileName}: ${msg}`);
     return result;
   }
 
-  // step 5: write the ts file
+  // step 5: write the ts file (unless dry run)
+  if (dryRun) {
+    result.status = 'migrated';
+    LOG.success(`${C.green}${fileName}${C.reset} → ${C.bold}${path.basename(tsFilePath)}${C.reset} ${C.dim}(dry run)${C.reset}`);
+    return result;
+  }
+
   try {
     fs.writeFileSync(tsFilePath, outputCode, 'utf-8');
     result.status = 'migrated';
     LOG.success(`${C.green}${fileName}${C.reset} → ${C.bold}${path.basename(tsFilePath)}${C.reset}`);
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
     result.status = 'error-write';
-    result.errors.push(`write error: ${err.message}`);
-    LOG.error(`failed to write ${path.basename(tsFilePath)}: ${err.message}`);
+    result.errors.push(`write error: ${msg}`);
+    LOG.error(`failed to write ${path.basename(tsFilePath)}: ${msg}`);
   }
 
   return result;
@@ -189,14 +232,14 @@ function migrateFile(filePath: string, backupDir: string): MigrationResult {
 function run(): void {
   console.log(BANNER);
 
-  // resolve project root — works from both dist/ (compiled) and src/ (ts-node)
-  const projectRoot = path.resolve(__dirname, __dirname.includes('dist') ? '../..' : '..');
-  const targetDir = path.resolve(projectRoot, 'src');
+  const { target: targetDir, dryRun } = parseArgs();
+  const projectRoot = path.resolve(__dirname, path.basename(__dirname) === 'dist' ? '../..' : '..');
   const backupDir = path.resolve(projectRoot, 'magikk-migrator/backups', new Date().toISOString().replace(/[:.]/g, '-'));
   const reportPath = path.resolve(projectRoot, 'magikk-migrator/migration-report.json');
 
   LOG.info(`target: ${C.bold}${targetDir}${C.reset}`);
   LOG.info(`backups: ${C.bold}${backupDir}${C.reset}`);
+  if (dryRun) LOG.info(`${C.yellow}dry run mode — no files will be written${C.reset}`);
   LOG.info('');
 
   if (!fs.existsSync(targetDir)) {
@@ -204,12 +247,11 @@ function run(): void {
     process.exit(1);
   }
 
-  fs.mkdirSync(backupDir, { recursive: true });
+  if (!dryRun) fs.mkdirSync(backupDir, { recursive: true });
 
   const allFiles = walkSync(targetDir);
   const jsFiles = allFiles.filter(f => f.endsWith('.js') || f.endsWith('.jsx'));
 
-  LOG.info(`found ${C.bold}${allFiles.length}${C.reset} total files`);
   LOG.info(`found ${C.bold}${jsFiles.length}${C.reset} javascript files to process`);
   LOG.info('');
   LOG.info(`${C.magenta}═══════════════════════════════════════════${C.reset}`);
@@ -222,7 +264,7 @@ function run(): void {
     const file = jsFiles[i];
     const progress = `[${i + 1}/${jsFiles.length}]`;
     LOG.info(`${C.dim}${progress}${C.reset} processing ${C.cyan}${path.relative(targetDir, file)}${C.reset}`);
-    results.push(migrateFile(file, backupDir));
+    results.push(migrateFile(file, backupDir, dryRun));
     console.log('');
   }
 
@@ -238,21 +280,24 @@ function run(): void {
   LOG.info(`  ${C.green}✓ migrated:${C.reset} ${migrated}`);
   LOG.info(`  ${C.yellow}⚠ skipped:${C.reset}  ${skipped}`);
   LOG.info(`  ${C.red}✗ errors:${C.reset}   ${errors}`);
-  LOG.info(`  backups:  ${backupDir}`);
+  if (!dryRun) LOG.info(`  backups:  ${backupDir}`);
 
-  try {
-    const report: MigrationReport = {
-      timestamp: new Date().toISOString(),
-      targetDir,
-      backupDir,
-      elapsedSeconds: parseFloat(elapsed),
-      summary: { total: jsFiles.length, migrated, skipped, errors },
-      files: results,
-    };
-    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    LOG.info(`  report:   ${reportPath}`);
-  } catch (err: any) {
-    LOG.warn(`failed to save report: ${err.message}`);
+  if (!dryRun) {
+    try {
+      const report: MigrationReport = {
+        timestamp: new Date().toISOString(),
+        targetDir,
+        backupDir,
+        elapsedSeconds: parseFloat(elapsed),
+        summary: { total: jsFiles.length, migrated, skipped, errors },
+        files: results,
+      };
+      fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+      LOG.info(`  report:   ${reportPath}`);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      LOG.warn(`failed to save report: ${msg}`);
+    }
   }
 
   console.log('');
