@@ -1,4 +1,4 @@
-import traverse from '@babel/traverse';
+import traverse, { type NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import type { File } from '@babel/types';
 import { guessType, extractJSDocTypes } from './analyzer';
@@ -8,10 +8,10 @@ const CAST_METHODS = new Set(['get', 'findOne', 'find', 'findOneAndUpdate', 'fin
 
 export function injectTypes(ast: File): File {
   traverse(ast, {
-    VariableDeclarator(path) {
+    VariableDeclarator(path: NodePath<t.VariableDeclarator>) {
       const { id, init } = path.node;
 
-      // mongoose model guard ;wrap in `as any` to prevent union callable errors
+      // mongoose model guard — wrap in `as any` to prevent union callable errors
       if (init && t.isLogicalExpression(init, { operator: '||' })) {
         const right = init.right;
         if (
@@ -38,7 +38,9 @@ export function injectTypes(ast: File): File {
       id.typeAnnotation = t.tsTypeAnnotation(guessedType);
     },
 
-    'FunctionDeclaration|FunctionExpression|ArrowFunctionExpression|ObjectMethod|ClassMethod'(path: any) {
+    // babel's compound visitor string doesn't have a clean NodePath type,
+    // so we use the general Function visitor which covers all function-like nodes
+    Function(path: NodePath<t.Function>) {
       const node = path.node;
 
       const leadingComments = node.leadingComments || path.parent?.leadingComments || [];
@@ -56,8 +58,8 @@ export function injectTypes(ast: File): File {
         }
       }
 
-      node.params.forEach((param: any) => {
-        if (param.typeAnnotation) return;
+      for (const param of node.params) {
+        if ((param as t.Identifier).typeAnnotation) continue;
 
         // rest parameters
         if (t.isRestElement(param)) {
@@ -67,37 +69,37 @@ export function injectTypes(ast: File): File {
               ? t.tsTypeAnnotation(jsdoc.params[restName])
               : t.tsTypeAnnotation(t.tsArrayType(t.tsAnyKeyword()));
           }
-          return;
+          continue;
         }
 
         // default values: function(x = false)
         if (t.isAssignmentPattern(param)) {
-          if (!t.isIdentifier(param.left)) return;
-          if (param.left.typeAnnotation) return;
+          if (!t.isIdentifier(param.left)) continue;
+          if (param.left.typeAnnotation) continue;
           const paramName = param.left.name;
           if (jsdoc.params[paramName]) {
             param.left.typeAnnotation = t.tsTypeAnnotation(jsdoc.params[paramName]);
-            return;
+            continue;
           }
           const guessedType = guessType(param.right);
           if (guessedType && !t.isTSAnyKeyword(guessedType)) {
             param.left.typeAnnotation = t.tsTypeAnnotation(guessedType);
           }
-          return;
+          continue;
         }
 
-        // destructured params skip, too risky
-        if (t.isObjectPattern(param) || t.isArrayPattern(param)) return;
+        // destructured params — skip, too risky
+        if (t.isObjectPattern(param) || t.isArrayPattern(param)) continue;
 
         // simple identifier params
         if (t.isIdentifier(param)) {
           if (jsdoc.params[param.name]) {
             param.typeAnnotation = t.tsTypeAnnotation(jsdoc.params[param.name]);
-            return;
+            continue;
           }
           param.typeAnnotation = t.tsTypeAnnotation(t.tsAnyKeyword());
         }
-      });
+      }
 
       // return type from jsdoc
       if (jsdoc.returnType && !node.returnType) {
@@ -107,7 +109,20 @@ export function injectTypes(ast: File): File {
       }
     },
 
-    CatchClause(path) {
+    // also handle ObjectMethod which isn't covered by Function visitor
+    ObjectMethod(path: NodePath<t.ObjectMethod>) {
+      const node = path.node;
+      for (const param of node.params) {
+        if (t.isIdentifier(param) && !param.typeAnnotation) {
+          param.typeAnnotation = t.tsTypeAnnotation(t.tsAnyKeyword());
+        }
+        if (t.isRestElement(param) && !param.typeAnnotation) {
+          param.typeAnnotation = t.tsTypeAnnotation(t.tsArrayType(t.tsAnyKeyword()));
+        }
+      }
+    },
+
+    CatchClause(path: NodePath<t.CatchClause>) {
       const param = path.node.param;
       if (!param || param.typeAnnotation) return;
       if (t.isIdentifier(param)) {
@@ -115,7 +130,7 @@ export function injectTypes(ast: File): File {
       }
     },
 
-    ClassProperty(path) {
+    ClassProperty(path: NodePath<t.ClassProperty>) {
       if (path.node.typeAnnotation || !path.node.value) return;
       const guessedType = guessType(path.node.value);
       if (guessedType && !t.isTSAnyKeyword(guessedType)) {
@@ -123,8 +138,8 @@ export function injectTypes(ast: File): File {
       }
     },
 
-    CallExpression(path) {
-      // discord.js addFields:cast inline objects to any
+    CallExpression(path: NodePath<t.CallExpression>) {
+      // discord.js addFields — cast inline objects to any
       if (
         t.isMemberExpression(path.node.callee) &&
         t.isIdentifier(path.node.callee.property, { name: 'addFields' })
@@ -149,7 +164,7 @@ export function injectTypes(ast: File): File {
     },
 
     // extract implicit class properties from constructor this.x = ...
-    ClassBody(path) {
+    ClassBody(path: NodePath<t.ClassBody>) {
       const body = path.node.body;
       const existingProps = new Set(
         body.filter((n): n is t.ClassProperty => t.isClassProperty(n) && t.isIdentifier(n.key)).map(n => (n.key as t.Identifier).name)
@@ -161,7 +176,7 @@ export function injectTypes(ast: File): File {
       const propsToAdd: t.ClassProperty[] = [];
 
       traverse(ctor, {
-        AssignmentExpression(assignPath: any) {
+        AssignmentExpression(assignPath: NodePath<t.AssignmentExpression>) {
           const left = assignPath.node.left;
           if (t.isMemberExpression(left) && t.isThisExpression(left.object) && t.isIdentifier(left.property)) {
             const propName = left.property.name;
@@ -219,3 +234,4 @@ function isChainedCall(node: t.Node): boolean {
   }
   return depth >= 2;
 }
+
