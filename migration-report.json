@@ -1,0 +1,2942 @@
+{
+  "timestamp": "2026-04-29T04:58:32.264Z",
+  "targetDir": "C:\\Users\\MY-PC\\Documents\\Aero\\src",
+  "backupDir": "C:\\Users\\MY-PC\\Documents\\Aero\\magikk-migrator\\backups\\2026-04-29T04-58-32-019Z",
+  "elapsedSeconds": 0.19,
+  "summary": {
+    "total": 244,
+    "migrated": 0,
+    "skipped": 244,
+    "errors": 0
+  },
+  "files": [
+    {
+      "source": "..\\src\\commands\\context\\Make it a Quote.js",
+      "target": "..\\src\\commands\\context\\Make it a Quote.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\context\\Translate Image.js",
+      "target": "..\\src\\commands\\context\\Translate Image.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\context\\Translate Message.js",
+      "target": "..\\src\\commands\\context\\Translate Message.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\economy\\balance.js",
+      "target": "..\\src\\commands\\prefix\\economy\\balance.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\economy\\coinflip.js",
+      "target": "..\\src\\commands\\prefix\\economy\\coinflip.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\economy\\daily.js",
+      "target": "..\\src\\commands\\prefix\\economy\\daily.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\economy\\ecoslots.js",
+      "target": "..\\src\\commands\\prefix\\economy\\ecoslots.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\economy\\leaderboard.js",
+      "target": "..\\src\\commands\\prefix\\economy\\leaderboard.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\economy\\mudae.js",
+      "target": "..\\src\\commands\\prefix\\economy\\mudae.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\economy\\mudaeharem.js",
+      "target": "..\\src\\commands\\prefix\\economy\\mudaeharem.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\economy\\pay.js",
+      "target": "..\\src\\commands\\prefix\\economy\\pay.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\economy\\work.js",
+      "target": "..\\src\\commands\\prefix\\economy\\work.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\afk.js",
+      "target": "..\\src\\commands\\prefix\\general\\afk.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\avatar.js",
+      "target": "..\\src\\commands\\prefix\\general\\avatar.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\help.js",
+      "target": "..\\src\\commands\\prefix\\general\\help.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\info.js",
+      "target": "..\\src\\commands\\prefix\\general\\info.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\invite.js",
+      "target": "..\\src\\commands\\prefix\\general\\invite.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\meme.js",
+      "target": "..\\src\\commands\\prefix\\general\\meme.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\ping.js",
+      "target": "..\\src\\commands\\prefix\\general\\ping.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\poll.js",
+      "target": "..\\src\\commands\\prefix\\general\\poll.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\say.js",
+      "target": "..\\src\\commands\\prefix\\general\\say.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\server.js",
+      "target": "..\\src\\commands\\prefix\\general\\server.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\serverStatus.js",
+      "target": "..\\src\\commands\\prefix\\general\\serverStatus.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\setprefix.js",
+      "target": "..\\src\\commands\\prefix\\general\\setprefix.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\ship.js",
+      "target": "..\\src\\commands\\prefix\\general\\ship.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\suggest.js",
+      "target": "..\\src\\commands\\prefix\\general\\suggest.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\urlscan.js",
+      "target": "..\\src\\commands\\prefix\\general\\urlscan.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\general\\waifuSfw.js",
+      "target": "..\\src\\commands\\prefix\\general\\waifuSfw.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\ban.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\ban.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\clear.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\clear.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\kick.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\kick.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\lock.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\lock.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\roleall.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\roleall.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\tempban.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\tempban.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\ticket.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\ticket.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\ticketClose.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\ticketClose.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\timeout.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\timeout.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\unban.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\unban.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\unlock.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\unlock.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\untimeout.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\untimeout.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\userclear.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\userclear.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\warn.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\warn.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\moderations\\whois.js",
+      "target": "..\\src\\commands\\prefix\\moderations\\whois.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\Uncategorized\\ecoaddmoney.js",
+      "target": "..\\src\\commands\\prefix\\Uncategorized\\ecoaddmoney.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\Uncategorized\\leaveServer.js",
+      "target": "..\\src\\commands\\prefix\\Uncategorized\\leaveServer.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\prefix\\Uncategorized\\listServers.js",
+      "target": "..\\src\\commands\\prefix\\Uncategorized\\listServers.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\game\\balance.js",
+      "target": "..\\src\\commands\\slash\\game\\balance.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\game\\braincells.js",
+      "target": "..\\src\\commands\\slash\\game\\braincells.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\game\\fixme.js",
+      "target": "..\\src\\commands\\slash\\game\\fixme.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\game\\harem.js",
+      "target": "..\\src\\commands\\slash\\game\\harem.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\game\\mudae.js",
+      "target": "..\\src\\commands\\slash\\game\\mudae.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\about.js",
+      "target": "..\\src\\commands\\slash\\General\\about.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\afk.js",
+      "target": "..\\src\\commands\\slash\\General\\afk.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\animechar.js",
+      "target": "..\\src\\commands\\slash\\General\\animechar.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\avatar.js",
+      "target": "..\\src\\commands\\slash\\General\\avatar.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\birthdays.js",
+      "target": "..\\src\\commands\\slash\\General\\birthdays.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\createserver.js",
+      "target": "..\\src\\commands\\slash\\General\\createserver.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\emojilist.js",
+      "target": "..\\src\\commands\\slash\\General\\emojilist.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\help.js",
+      "target": "..\\src\\commands\\slash\\General\\help.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\pingself.js",
+      "target": "..\\src\\commands\\slash\\General\\pingself.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\setprefix.js",
+      "target": "..\\src\\commands\\slash\\General\\setprefix.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\timer.js",
+      "target": "..\\src\\commands\\slash\\General\\timer.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\waifu.js",
+      "target": "..\\src\\commands\\slash\\General\\waifu.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\General\\website.js",
+      "target": "..\\src\\commands\\slash\\General\\website.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\ban.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\ban.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\channel.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\channel.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\echo.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\echo.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\kick.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\kick.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\leaver.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\leaver.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\reload.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\reload.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\roleAll.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\roleAll.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\server.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\server.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\serverstatus.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\serverstatus.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\suggest.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\suggest.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\tempban.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\tempban.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\ticket.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\ticket.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\timeout.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\timeout.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\unban.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\unban.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\untimeout.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\untimeout.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\warn.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\warn.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\welcomer.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\welcomer.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Moderation\\whois.js",
+      "target": "..\\src\\commands\\slash\\Moderation\\whois.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Music\\music.js",
+      "target": "..\\src\\commands\\slash\\Music\\music.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Nsfw\\gallery.js",
+      "target": "..\\src\\commands\\slash\\Nsfw\\gallery.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\angry.js",
+      "target": "..\\src\\commands\\slash\\Others\\angry.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\baka.js",
+      "target": "..\\src\\commands\\slash\\Others\\baka.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\bite.js",
+      "target": "..\\src\\commands\\slash\\Others\\bite.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\blush.js",
+      "target": "..\\src\\commands\\slash\\Others\\blush.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\bonk.js",
+      "target": "..\\src\\commands\\slash\\Others\\bonk.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\bored.js",
+      "target": "..\\src\\commands\\slash\\Others\\bored.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\bye.js",
+      "target": "..\\src\\commands\\slash\\Others\\bye.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\cry.js",
+      "target": "..\\src\\commands\\slash\\Others\\cry.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\cuddle.js",
+      "target": "..\\src\\commands\\slash\\Others\\cuddle.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\dance.js",
+      "target": "..\\src\\commands\\slash\\Others\\dance.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\facepalm.js",
+      "target": "..\\src\\commands\\slash\\Others\\facepalm.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\feed.js",
+      "target": "..\\src\\commands\\slash\\Others\\feed.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\handhold.js",
+      "target": "..\\src\\commands\\slash\\Others\\handhold.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\handshake.js",
+      "target": "..\\src\\commands\\slash\\Others\\handshake.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\happpy.js",
+      "target": "..\\src\\commands\\slash\\Others\\happpy.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\highfive.js",
+      "target": "..\\src\\commands\\slash\\Others\\highfive.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\hug.js",
+      "target": "..\\src\\commands\\slash\\Others\\hug.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\husbando.js",
+      "target": "..\\src\\commands\\slash\\Others\\husbando.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\invite.js",
+      "target": "..\\src\\commands\\slash\\Others\\invite.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\kick.js",
+      "target": "..\\src\\commands\\slash\\Others\\kick.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\kiss.js",
+      "target": "..\\src\\commands\\slash\\Others\\kiss.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\kitsune.js",
+      "target": "..\\src\\commands\\slash\\Others\\kitsune.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\laugh.js",
+      "target": "..\\src\\commands\\slash\\Others\\laugh.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\lurk.js",
+      "target": "..\\src\\commands\\slash\\Others\\lurk.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\neko.js",
+      "target": "..\\src\\commands\\slash\\Others\\neko.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\nod.js",
+      "target": "..\\src\\commands\\slash\\Others\\nod.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\nom.js",
+      "target": "..\\src\\commands\\slash\\Others\\nom.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\nope.js",
+      "target": "..\\src\\commands\\slash\\Others\\nope.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\pat.js",
+      "target": "..\\src\\commands\\slash\\Others\\pat.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\peck.js",
+      "target": "..\\src\\commands\\slash\\Others\\peck.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\poke.js",
+      "target": "..\\src\\commands\\slash\\Others\\poke.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\pout.js",
+      "target": "..\\src\\commands\\slash\\Others\\pout.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\punch.js",
+      "target": "..\\src\\commands\\slash\\Others\\punch.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\run.js",
+      "target": "..\\src\\commands\\slash\\Others\\run.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\ship.js",
+      "target": "..\\src\\commands\\slash\\Others\\ship.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\shoot.js",
+      "target": "..\\src\\commands\\slash\\Others\\shoot.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\shrug.js",
+      "target": "..\\src\\commands\\slash\\Others\\shrug.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\slap.js",
+      "target": "..\\src\\commands\\slash\\Others\\slap.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\sleep.js",
+      "target": "..\\src\\commands\\slash\\Others\\sleep.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\smile.js",
+      "target": "..\\src\\commands\\slash\\Others\\smile.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\smug.js",
+      "target": "..\\src\\commands\\slash\\Others\\smug.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\stare.js",
+      "target": "..\\src\\commands\\slash\\Others\\stare.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\tableflip.js",
+      "target": "..\\src\\commands\\slash\\Others\\tableflip.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\think.js",
+      "target": "..\\src\\commands\\slash\\Others\\think.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\thumbsup.js",
+      "target": "..\\src\\commands\\slash\\Others\\thumbsup.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\tickle.js",
+      "target": "..\\src\\commands\\slash\\Others\\tickle.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\touch.js",
+      "target": "..\\src\\commands\\slash\\Others\\touch.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\translate.js",
+      "target": "..\\src\\commands\\slash\\Others\\translate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\wave.js",
+      "target": "..\\src\\commands\\slash\\Others\\wave.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\wink.js",
+      "target": "..\\src\\commands\\slash\\Others\\wink.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\yawn.js",
+      "target": "..\\src\\commands\\slash\\Others\\yawn.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\Others\\yeet.js",
+      "target": "..\\src\\commands\\slash\\Others\\yeet.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\utility\\antiraid.js",
+      "target": "..\\src\\commands\\slash\\utility\\antiraid.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\utility\\convert.js",
+      "target": "..\\src\\commands\\slash\\utility\\convert.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\utility\\translateImage.js",
+      "target": "..\\src\\commands\\slash\\utility\\translateImage.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\utility\\urlscanner.js",
+      "target": "..\\src\\commands\\slash\\utility\\urlscanner.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\commands\\slash\\utility\\weather.js",
+      "target": "..\\src\\commands\\slash\\utility\\weather.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\antiraidReady.js",
+      "target": "..\\src\\events\\antiraidReady.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\birthdays.js",
+      "target": "..\\src\\events\\birthdays.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\channelCreate.js",
+      "target": "..\\src\\events\\channelCreate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\channelDelete.js",
+      "target": "..\\src\\events\\channelDelete.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\channelUpdate.js",
+      "target": "..\\src\\events\\channelUpdate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\emojiDelete.js",
+      "target": "..\\src\\events\\emojiDelete.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\guildBanAdd.js",
+      "target": "..\\src\\events\\guildBanAdd.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\guildCreate.js",
+      "target": "..\\src\\events\\guildCreate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\guildMemberAdd.js",
+      "target": "..\\src\\events\\guildMemberAdd.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\guildMemberRemove.js",
+      "target": "..\\src\\events\\guildMemberRemove.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\guildMemberUpdate.js",
+      "target": "..\\src\\events\\guildMemberUpdate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\interactionCreate.js",
+      "target": "..\\src\\events\\interactionCreate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\messageCreate.js",
+      "target": "..\\src\\events\\messageCreate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\modalSubmit.js",
+      "target": "..\\src\\events\\modalSubmit.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\roleCreate.js",
+      "target": "..\\src\\events\\roleCreate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\roleDelete.js",
+      "target": "..\\src\\events\\roleDelete.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\roleUpdate.js",
+      "target": "..\\src\\events\\roleUpdate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\stickerDelete.js",
+      "target": "..\\src\\events\\stickerDelete.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\events\\webhookUpdate.js",
+      "target": "..\\src\\events\\webhookUpdate.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\aiAgent.js",
+      "target": "..\\src\\handlers\\aiAgent.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\buttonHandler.js",
+      "target": "..\\src\\handlers\\buttonHandler.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\commandHandler.js",
+      "target": "..\\src\\handlers\\commandHandler.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\errorhandler.js",
+      "target": "..\\src\\handlers\\errorhandler.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\eventHandler.js",
+      "target": "..\\src\\handlers\\eventHandler.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\guildSync.js",
+      "target": "..\\src\\handlers\\guildSync.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\lavalink.js",
+      "target": "..\\src\\handlers\\lavalink.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\player\\controls.js",
+      "target": "..\\src\\handlers\\player\\controls.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\player\\embeds.js",
+      "target": "..\\src\\handlers\\player\\embeds.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\player\\error.js",
+      "target": "..\\src\\handlers\\player\\error.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\player\\events.js",
+      "target": "..\\src\\handlers\\player\\events.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\player\\index.js",
+      "target": "..\\src\\handlers\\player\\index.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\player\\manager.js",
+      "target": "..\\src\\handlers\\player\\manager.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\player\\search.js",
+      "target": "..\\src\\handlers\\player\\search.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\quote\\imageGenerator.js",
+      "target": "..\\src\\handlers\\quote\\imageGenerator.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\quote\\QuoteContext.js",
+      "target": "..\\src\\handlers\\quote\\QuoteContext.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\quote\\storage.js",
+      "target": "..\\src\\handlers\\quote\\storage.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\handlers\\translations\\translationHandler.js",
+      "target": "..\\src\\handlers\\translations\\translationHandler.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\models\\User.js",
+      "target": "..\\src\\models\\User.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\ageVerify.js",
+      "target": "..\\src\\modules\\ageVerify.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\AMA.js",
+      "target": "..\\src\\modules\\AMA.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\AntiNuke.js",
+      "target": "..\\src\\modules\\AntiNuke.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\AntiSpam.js",
+      "target": "..\\src\\modules\\AntiSpam.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\anti_raid.js",
+      "target": "..\\src\\modules\\anti_raid.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\APA.js",
+      "target": "..\\src\\modules\\APA.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\bot-protection.js",
+      "target": "..\\src\\modules\\bot-protection.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\ama\\buttons.js",
+      "target": "..\\src\\modules\\helpers\\ama\\buttons.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\ama\\config.js",
+      "target": "..\\src\\modules\\helpers\\ama\\config.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\ama\\database.js",
+      "target": "..\\src\\modules\\helpers\\ama\\database.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\ama\\detection.js",
+      "target": "..\\src\\modules\\helpers\\ama\\detection.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\ama\\index.js",
+      "target": "..\\src\\modules\\helpers\\ama\\index.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\ama\\notification.js",
+      "target": "..\\src\\modules\\helpers\\ama\\notification.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\ama\\punishment.js",
+      "target": "..\\src\\modules\\helpers\\ama\\punishment.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\ama\\tracking.js",
+      "target": "..\\src\\modules\\helpers\\ama\\tracking.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\buttons.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\buttons.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\config.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\config.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\database.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\database.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\detection.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\detection.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\index.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\index.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\notification.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\notification.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\punishment.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\punishment.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\restoration.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\restoration.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\storage.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\storage.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antinuke\\tracking.js",
+      "target": "..\\src\\modules\\helpers\\antinuke\\tracking.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antispam\\buttons.js",
+      "target": "..\\src\\modules\\helpers\\antispam\\buttons.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antispam\\config.js",
+      "target": "..\\src\\modules\\helpers\\antispam\\config.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antispam\\database.js",
+      "target": "..\\src\\modules\\helpers\\antispam\\database.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antispam\\detection.js",
+      "target": "..\\src\\modules\\helpers\\antispam\\detection.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antispam\\index.js",
+      "target": "..\\src\\modules\\helpers\\antispam\\index.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antispam\\notification.js",
+      "target": "..\\src\\modules\\helpers\\antispam\\notification.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antispam\\punishment.js",
+      "target": "..\\src\\modules\\helpers\\antispam\\punishment.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\antispam\\tracking.js",
+      "target": "..\\src\\modules\\helpers\\antispam\\tracking.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\apa\\buttons.js",
+      "target": "..\\src\\modules\\helpers\\apa\\buttons.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\apa\\config.js",
+      "target": "..\\src\\modules\\helpers\\apa\\config.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\apa\\database.js",
+      "target": "..\\src\\modules\\helpers\\apa\\database.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\apa\\detection.js",
+      "target": "..\\src\\modules\\helpers\\apa\\detection.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\apa\\index.js",
+      "target": "..\\src\\modules\\helpers\\apa\\index.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\apa\\neutralize.js",
+      "target": "..\\src\\modules\\helpers\\apa\\neutralize.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\apa\\notification.js",
+      "target": "..\\src\\modules\\helpers\\apa\\notification.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\apa\\punishment.js",
+      "target": "..\\src\\modules\\helpers\\apa\\punishment.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\apa\\storage.js",
+      "target": "..\\src\\modules\\helpers\\apa\\storage.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\bot-protection\\buttons.js",
+      "target": "..\\src\\modules\\helpers\\bot-protection\\buttons.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\bot-protection\\config.js",
+      "target": "..\\src\\modules\\helpers\\bot-protection\\config.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\bot-protection\\database.js",
+      "target": "..\\src\\modules\\helpers\\bot-protection\\database.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\bot-protection\\detection.js",
+      "target": "..\\src\\modules\\helpers\\bot-protection\\detection.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\bot-protection\\emojis.js",
+      "target": "..\\src\\modules\\helpers\\bot-protection\\emojis.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\bot-protection\\index.js",
+      "target": "..\\src\\modules\\helpers\\bot-protection\\index.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\bot-protection\\notification.js",
+      "target": "..\\src\\modules\\helpers\\bot-protection\\notification.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\bot-protection\\permissions.js",
+      "target": "..\\src\\modules\\helpers\\bot-protection\\permissions.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\bot-protection\\punishment.js",
+      "target": "..\\src\\modules\\helpers\\bot-protection\\punishment.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\GlobalButtonStorage.js",
+      "target": "..\\src\\modules\\helpers\\GlobalButtonStorage.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\modules\\helpers\\logManager.js",
+      "target": "..\\src\\modules\\helpers\\logManager.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\AnimeListScraper.js",
+      "target": "..\\src\\utils\\AnimeListScraper.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\canvasFonts.js",
+      "target": "..\\src\\utils\\canvasFonts.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\CloudDB.js",
+      "target": "..\\src\\utils\\CloudDB.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\constants.js",
+      "target": "..\\src\\utils\\constants.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\economyUtil.js",
+      "target": "..\\src\\utils\\economyUtil.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\guildprefix.js",
+      "target": "..\\src\\utils\\guildprefix.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\logger.js",
+      "target": "..\\src\\utils\\logger.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\status.js",
+      "target": "..\\src\\utils\\status.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\ticketConfig.js",
+      "target": "..\\src\\utils\\ticketConfig.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\ticketManager.js",
+      "target": "..\\src\\utils\\ticketManager.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\ticketUtils.js",
+      "target": "..\\src\\utils\\ticketUtils.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    },
+    {
+      "source": "..\\src\\utils\\timerRestore.js",
+      "target": "..\\src\\utils\\timerRestore.ts",
+      "status": "skipped-existing",
+      "errors": [],
+      "warnings": [
+        "ts file already exists with content"
+      ],
+      "stats": {
+        "typesInjected": 0
+      }
+    }
+  ]
+}
