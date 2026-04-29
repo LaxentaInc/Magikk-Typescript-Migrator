@@ -2,6 +2,14 @@ import traverse from '@babel/traverse';
 import * as t from '@babel/types';
 import type { File } from '@babel/types';
 
+// strip .js/.jsx from relative import paths so typescript resolves them properly
+function normalizeImportSource(source: string): string {
+  if (source.startsWith('.') && /\.jsx?$/.test(source)) {
+    return source.replace(/\.jsx?$/, '');
+  }
+  return source;
+}
+
 export function convertModuleSystem(ast: File): File {
   const importsToAdd: Array<{ node: t.ImportDeclaration; path: any }> = [];
   const pathsToRemove: any[] = [];
@@ -20,7 +28,7 @@ export function convertModuleSystem(ast: File): File {
         decl.init.arguments.length === 1 &&
         t.isStringLiteral(decl.init.arguments[0])
       ) {
-        const source = decl.init.arguments[0].value;
+        const source = normalizeImportSource(decl.init.arguments[0].value);
 
         if (t.isObjectPattern(decl.id)) {
           const specifiers: t.ImportSpecifier[] = [];
@@ -52,7 +60,71 @@ export function convertModuleSystem(ast: File): File {
     ExpressionStatement(path) {
       if (!path.parentPath.isProgram()) return;
       const expr = path.node.expression;
+
+      // #1 — side-effect require() calls: require('dotenv').config() or bare require('./setup')
+      if (t.isCallExpression(expr)) {
+        // bare require('./setup') — no assignment, no chaining
+        if (
+          t.isIdentifier(expr.callee, { name: 'require' }) &&
+          expr.arguments.length === 1 &&
+          t.isStringLiteral(expr.arguments[0])
+        ) {
+          const source = normalizeImportSource(expr.arguments[0].value);
+          path.replaceWith(t.importDeclaration([], t.stringLiteral(source)));
+          return;
+        }
+
+        // require('dotenv').config() — method call on require
+        if (
+          t.isMemberExpression(expr.callee) &&
+          t.isCallExpression(expr.callee.object) &&
+          t.isIdentifier(expr.callee.object.callee, { name: 'require' }) &&
+          expr.callee.object.arguments.length === 1 &&
+          t.isStringLiteral(expr.callee.object.arguments[0])
+        ) {
+          const source = normalizeImportSource(expr.callee.object.arguments[0].value);
+          const methodName = t.isIdentifier(expr.callee.property) ? expr.callee.property.name : null;
+
+          if (methodName === 'config') {
+            // require('dotenv').config() -> import 'dotenv/config'
+            path.replaceWith(t.importDeclaration([], t.stringLiteral(`${source}/config`)));
+          } else {
+            // generic: require('x').y() -> import _x from 'x'; _x.y()
+            const tempId = `_${source.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            path.replaceWithMultiple([
+              t.importDeclaration([t.importDefaultSpecifier(t.identifier(tempId))], t.stringLiteral(source)),
+              t.expressionStatement(
+                t.callExpression(
+                  t.memberExpression(t.identifier(tempId), expr.callee.property),
+                  expr.arguments
+                )
+              ),
+            ]);
+          }
+          return;
+        }
+      }
+
       if (!t.isAssignmentExpression(expr) || !t.isMemberExpression(expr.left)) return;
+
+      // #2 — exports.X = Y (without module. prefix)
+      if (
+        t.isIdentifier(expr.left.object, { name: 'exports' }) &&
+        t.isIdentifier(expr.left.property)
+      ) {
+        const propName = expr.left.property.name;
+        if (t.isIdentifier(expr.right)) {
+          path.replaceWith(t.exportNamedDeclaration(null, [
+            t.exportSpecifier(t.identifier(expr.right.name), t.identifier(propName)),
+          ]));
+        } else {
+          path.replaceWith(t.exportNamedDeclaration(
+            t.variableDeclaration('const', [t.variableDeclarator(t.identifier(propName), expr.right)]),
+            []
+          ));
+        }
+        return;
+      }
 
       // module.exports.X = Y
       if (
@@ -87,8 +159,9 @@ export function convertModuleSystem(ast: File): File {
         right.arguments.length === 1 &&
         t.isStringLiteral(right.arguments[0])
       ) {
+        const source = normalizeImportSource(right.arguments[0].value);
         path.replaceWithMultiple([
-          t.importDeclaration([t.importDefaultSpecifier(t.identifier('_reexport'))], t.stringLiteral(right.arguments[0].value)),
+          t.importDeclaration([t.importDefaultSpecifier(t.identifier('_reexport'))], t.stringLiteral(source)),
           t.exportDefaultDeclaration(t.identifier('_reexport')),
         ]);
         return;
@@ -136,9 +209,41 @@ export function convertModuleSystem(ast: File): File {
     pathsToRemove[i].remove();
   }
 
+  // #6 — deduplicate imports from the same source before inserting
   if (importsToAdd.length > 0 && ast.program?.body) {
-    ast.program.body.unshift(...importsToAdd.map(i => i.node));
+    const merged = deduplicateImports(importsToAdd.map(i => i.node));
+    ast.program.body.unshift(...merged);
   }
 
   return ast;
+}
+
+// merge multiple import declarations from the same source into one
+function deduplicateImports(imports: t.ImportDeclaration[]): t.ImportDeclaration[] {
+  const bySource = new Map<string, t.ImportDeclaration>();
+
+  for (const imp of imports) {
+    const source = imp.source.value;
+    const existing = bySource.get(source);
+
+    if (!existing) {
+      bySource.set(source, t.importDeclaration([...imp.specifiers], t.stringLiteral(source)));
+      continue;
+    }
+
+    // merge specifiers, avoiding duplicates
+    for (const spec of imp.specifiers) {
+      const isDupe = existing.specifiers.some(s => {
+        if (t.isImportDefaultSpecifier(s) && t.isImportDefaultSpecifier(spec)) return true;
+        if (t.isImportSpecifier(s) && t.isImportSpecifier(spec)) {
+          return t.isIdentifier(s.local) && t.isIdentifier(spec.local) && s.local.name === spec.local.name;
+        }
+        return false;
+      });
+
+      if (!isDupe) existing.specifiers.push(spec);
+    }
+  }
+
+  return Array.from(bySource.values());
 }
