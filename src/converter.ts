@@ -1,4 +1,4 @@
-import traverse from '@babel/traverse';
+import traverse, { type NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import type { File } from '@babel/types';
 
@@ -11,8 +11,8 @@ function normalizeImportSource(source: string): string {
 }
 
 export function convertModuleSystem(ast: File): File {
-  const importsToAdd: Array<{ node: t.ImportDeclaration; path: any }> = [];
-  const pathsToRemove: any[] = [];
+  const importsToAdd: Array<{ node: t.ImportDeclaration; path: NodePath<t.VariableDeclaration> }> = [];
+  const pathsToRemove: NodePath<t.VariableDeclaration>[] = [];
 
   traverse(ast, {
     VariableDeclaration(path) {

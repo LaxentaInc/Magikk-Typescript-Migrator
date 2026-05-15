@@ -1,28 +1,58 @@
 {
-  "name": "magikk-migrator",
+  "name": "mts-migrator",
   "version": "2.0.0",
+  "description": "js to ts migration engine — converts commonjs to esm, infers types from ast analysis, extracts jsdoc annotations, and refines types with the typescript compiler",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "commonjs",
+  "bin": {
+    "mts": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "typescript",
+    "migration",
+    "javascript",
+    "converter",
+    "babel",
+    "ast",
+    "commonjs",
+    "esm",
+    "type-inference",
+    "jsdoc",
+    "ts-morph"
+  ],
+  "author": "Laxenta Inc",
+  "homepage": "https://colorwall.xyz",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "tsc && node dist/index.js"
+    "start": "node dist/cli.js",
+    "dev": "tsc && node dist/cli.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@babel/generator": "^7.23.0",
     "@babel/parser": "^7.23.0",
     "@babel/traverse": "^7.23.0",
     "@babel/types": "^7.23.0",
-    "typescript": "^5.0.0"
+    "ts-morph": "^28.0.0"
   },
   "devDependencies": {
     "@types/babel__generator": "^7.6.8",
     "@types/babel__traverse": "^7.20.6",
-    "@types/node": "^22.15.3"
+    "@types/node": "^22.15.3",
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.6"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LaxentaInc/Magikk-Typescript-Migrator.git"
   },
-  "license": "ISC"
+  "license": "AGPL-3.0"
 }

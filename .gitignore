@@ -2,3 +2,5 @@ node_modules/
 dist/
 backups/
 migration-report.json
+mts-migrator/
+*.tsbuildinfo

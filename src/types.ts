@@ -1,4 +1,7 @@
-import type { File } from '@babel/types';
+import type { File, TSType } from '@babel/types';
+import type { NodePath, TraverseOptions } from '@babel/traverse';
+
+// -- parse types --
 
 export interface ParseResult {
   ast: File | null;
@@ -17,12 +20,15 @@ export interface ParseOptions {
   filePath?: string;
 }
 
+// -- migration types --
+
 export interface MigrationResult {
   source: string;
   target: string;
   status: MigrationStatus;
   errors: string[];
   warnings: string[];
+  refinedTypes?: number;
 }
 
 export type MigrationStatus =
@@ -47,11 +53,23 @@ export interface MigrationReport {
     migrated: number;
     skipped: number;
     errors: number;
+    typesRefined: number;
   };
   files: MigrationResult[];
 }
 
+// -- jsdoc types --
+
 export interface JSDocInfo {
-  params: Record<string, import('@babel/types').TSType>;
-  returnType: import('@babel/types').TSType | null;
+  params: Record<string, TSType>;
+  returnType: TSType | null;
+}
+
+// -- cli types --
+
+export interface CliArgs {
+  target: string;
+  dryRun: boolean;
+  skipRefine: boolean;
+  skipLint: boolean;
 }
