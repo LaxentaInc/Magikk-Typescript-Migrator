@@ -23,9 +23,6 @@ importers:
       ts-morph:
         specifier: ^28.0.0
         version: 28.0.0
-      typescript:
-        specifier: ^5.0.0
-        version: 5.9.3
     devDependencies:
       '@types/babel__generator':
         specifier: ^7.6.8
@@ -36,6 +33,9 @@ importers:
       '@types/node':
         specifier: ^22.15.3
         version: 22.19.19
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
       vitest:
         specifier: ^4.1.6
         version: 4.1.6(@types/node@22.19.19)(vite@8.0.13(@types/node@22.19.19))
