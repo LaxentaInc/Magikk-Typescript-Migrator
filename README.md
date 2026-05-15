@@ -1,10 +1,9 @@
-# mts-migrator - A JS -? TS Code Migrator, As It Is.
-### Made because i needed it, there might be others, but idk
-### I used to this convert by 33k ish lines of JS code to typescript, it works <.3
-
-> js → ts migration engine by [laxenta inc](https://colorwall.xyz)
+## A js → ts code migrator, As It Is.
+### Made because i needed it, there might be others, but idk, I used to this convert by 33k ish lines of JS code to typescript, it works <.3
 
 converts javascript files to typescript — handles module system conversion (commonjs → esm), infers types from ast analysis, extracts jsdoc annotations, refines types with the typescript compiler, and optionally runs eslint --fix.
+
+> js → ts migrator by [laxenta inc](https://colorwall.xyz)
 
 ## install
 
