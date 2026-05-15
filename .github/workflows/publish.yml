@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: write
 
     steps:
       - name: Checkout code
@@ -54,3 +55,17 @@ jobs:
             --title "mts-migrator v${{ steps.get_version.outputs.VERSION }}" \
             --notes "automated release via github actions." \
             --target main
+
+      - name: Setup Node.js for GitHub Packages
+        uses: actions/setup-node@v4
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Rename package for GitHub Packages
+        run: |
+          node -e "const fs = require('fs'); const pkg = JSON.parse(fs.readFileSync('package.json')); pkg.name = '@LaxentaInc/' + pkg.name; fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));"
+
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
