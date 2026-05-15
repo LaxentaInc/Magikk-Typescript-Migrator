@@ -23,10 +23,10 @@ const BANNER = `
 ${C.magenta}${C.bold}
     ╔══════════════════════════════════════════════════════════╗
     ║                                                          ║
-    ║    M A G I K K   M I G R A T O R  <.3                     ║
+    ║    M A G I K K   M I G R A T O R  <.3                    ║
     ║                                                          ║
     ║   js → ts transpilation engine                           ║
-    ║   powered by babel ast manipulation                      ║
+    ║   powered by hopes and dreams                            ║
     ║                                                          ║
     ╚══════════════════════════════════════════════════════════╝
 ${C.reset}`;
