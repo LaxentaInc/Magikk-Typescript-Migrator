@@ -1,6 +1,6 @@
 {
   "name": "mts-migrator",
-  "version": "2.0.11",
+  "version": "2.1.11",
   "description": "js to ts migration engine — converts commonjs to esm, infers types from ast analysis, extracts jsdoc annotations, and refines types with the typescript compiler",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
