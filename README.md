@@ -1,42 +1,67 @@
-## A js → ts code migrator, As It Is.
-### Made because i needed it, there might be others, but idk, I used to this convert by 33k ish lines of JS code to typescript, it works <.3
+## A js → ts code migrator, 
+### In the world of misunderstanding, To be As accurate as possible
 
 converts javascript files to typescript — handles module system conversion (commonjs → esm), infers types from ast analysis, extracts jsdoc annotations, refines types with the typescript compiler, and optionally runs eslint --fix.
 
-> js → ts migrator by [laxenta inc](https://colorwall.xyz)
+js → ts migrator by [Laxenta INC.](https://colorwall.xyz)
 
-## install
+### I also have devloped A Wallpaper Engine in Rust/Tauri! [Colorwall](https://colorwall.xyz)
 
+## Install
+you can use it directly via `pnpm dlx` or `npx` without installing:
 ```bash
-# global (recommended for cli usage)
-pnpm add -g mts-migrator
-
-# or local
-pnpm add -D mts-migrator
+pnpm dlx mts-migrator
+# or
+npx mts-migrator
 ```
 
-## cli usage
+OR install globally (recommended for frequent cli usage):
+```bash
+pnpm add -g mts-migrator
+# or
+npm i -g mts-migrator
+```
+
+## ----------------------------------- Cli usage, All commands are listed --------------------------------
+when you run `mts` (or `pnpm mts` / `npx mts-migrator`) without a target, it will prompt you if you want to run it on all folders in your current directory. if you specify a folder name, it will recursively search for a folder with that name so you don't have to specify the exact path!
 
 ```bash
-# migrate a directory (defaults to ./src)
-mts ./src
+> IF YOU WANT TO USE TO MIGRATE YOUR FOLDER, JUST COPY THIS COMMAND:
 
+# run interactively (will prompt for confirmation)
+pnpm mts
+```
+```bash
+# Or Migrate (to typescript) a specific folder by name (recursively searches for "components named folder")
+pnpm mts components
+```
+```bash
+# HELP COMMAND!
+pnpm mts --help
+```
+
+```bash
+# use --target explicitly
+pnpm mts --target utils
+```
+```bash
 # preview changes without writing
-mts ./src --dry-run
-
+pnpm mts src --dry-run
+```
+```bash
 # skip ts-morph type refinement
-mts ./src --no-refine
+pnpm mts src --no-refine
+```
+```bash
+# skip `eslint --fix` post-processing  
+pnpm mts src --no-lint
 
-# skip eslint --fix post-processing  
-mts ./src --no-lint
-
+```bash
 # show help
-mts --help
+pnpm mts --help
 ```
 
 ## what it does
-
-### pipeline
 
 ```
 .js file → parse (babel) → convert modules → inject types → generate .ts

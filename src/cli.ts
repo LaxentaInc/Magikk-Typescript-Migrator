@@ -2,6 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import readline from 'readline';
 import { codeToAST } from './parser';
 import { convertModuleSystem } from './converter';
 import { injectTypes } from './transformer';
@@ -30,7 +31,7 @@ ${C.magenta}${C.bold}
     ║    M T S   M I G R A T O R                               ║
     ║                                                          ║
     ║   js → ts transpilation engine                           ║
-    ║   by laxenta inc — colorwall.xyz                         ║
+    ║   by laxenta inc — https://colorwall.xyz                 ║
     ║                                                          ║
     ╚══════════════════════════════════════════════════════════╝
 ${C.reset}`;
@@ -80,13 +81,25 @@ function parseArgs(): CliArgs {
     }
   }
 
-  if (!target) {
-    target = path.resolve(process.cwd(), 'src');
-  } else {
-    target = path.resolve(target);
-  }
-
   return { target, dryRun, skipRefine, skipLint };
+}
+
+function findTargetDir(baseDir: string, targetName: string): string | null {
+  try {
+    const entries = fs.readdirSync(baseDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.isDirectory() && !IGNORE_DIRS.has(entry.name)) {
+        if (entry.name === targetName) {
+          return path.join(baseDir, entry.name);
+        }
+        const found = findTargetDir(path.join(baseDir, entry.name), targetName);
+        if (found) return found;
+      }
+    }
+  } catch (e) {
+    //ignore read errors
+  }
+  return null;
 }
 
 function printHelp(): void {
@@ -95,18 +108,26 @@ ${C.bold}mts-migrator${C.reset} — js to ts migration engine
 
 ${C.bold}usage:${C.reset}
   mts [target] [options]
+  pnpm mts [target] [options]
+  npx mts-migrator [target] [options]
 
 ${C.bold}options:${C.reset}
-  --target <dir>   target directory (default: ./src)
+  --target <dir>   target folder name or path and thats it and it will run on it!
   --dry-run        preview changes without writing files
   --no-refine      skip ts-morph type refinement pass
   --no-lint        skip eslint --fix post-processing
   -h, --help       show this help
 
 ${C.bold}examples:${C.reset}
-  mts ./src
-  mts --target ./lib --dry-run
-  mts ./src --no-refine --no-lint
+  *if you do not use pnpm, use npm instead of it idk*
+
+  pnpm mts (Just do this command if your are confused; migrates the whole working folder!)
+
+  pnpm mts components (targets the folder named components)
+
+  pnpm mts --target utils --dry-run (preview changes without writing files)
+
+  npx mts-migrator src --no-refine --no-lint (skip eslint --fix post-processing)
 `);
 }
 
@@ -255,10 +276,47 @@ function migrateFile(filePath: string, backupDir: string, dryRun: boolean): Migr
   return result;
 }
 
-function run(): void {
+async function run(): Promise<void> {
   console.log(BANNER);
 
-  const { target: targetDir, dryRun, skipRefine, skipLint } = parseArgs();
+  const { target: rawTarget, dryRun, skipRefine, skipLint } = parseArgs();
+
+  let targetDir = '';
+
+  if (!rawTarget) {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+    
+    const topLevelFolder = path.basename(process.cwd());
+    const answer = await new Promise<string>(resolve => {
+      rl.question(`${C.yellow}[?]${C.reset} Heyyyy Welcome! Anyways, do you want to perform the action inside every folder inside [${topLevelFolder}]? (Y/n) `, resolve);
+    });
+    rl.close();
+
+    const lowerAnswer = answer.trim().toLowerCase();
+    if (lowerAnswer === '' || lowerAnswer === 'y' || lowerAnswer === 'yes') {
+      targetDir = process.cwd();
+    } else {
+      printHelp();
+      process.exit(0);
+    }
+  } else {
+    if (fs.existsSync(path.resolve(process.cwd(), rawTarget))) {
+      targetDir = path.resolve(process.cwd(), rawTarget);
+    } else {
+      const found = findTargetDir(process.cwd(), rawTarget);
+      if (found) {
+        targetDir = found;
+        LOG.info(`found matching folder: ${C.bold}${targetDir}${C.reset}`);
+      } else {
+        LOG.error(`could not find any folder named "${rawTarget}"`);
+        process.exit(1);
+      }
+    }
+  }
+
   const backupDir = path.resolve(process.cwd(), 'mts-migrator/backups', new Date().toISOString().replace(/[:.]/g, '-'));
   const reportPath = path.resolve(process.cwd(), 'mts-migrator/migration-report.json');
 
@@ -379,4 +437,4 @@ function run(): void {
   console.log('');
 }
 
-run();
+run().catch(console.error);
