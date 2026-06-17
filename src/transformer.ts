@@ -2,11 +2,14 @@ import traverse, { type NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import type { File } from '@babel/types';
 import { guessType, extractJSDocTypes } from './analyzer';
+import type { TransformOptions } from './types';
 
 const MONGOOSE_METHODS = new Set(['Schema', 'model', 'models']);
 const CAST_METHODS = new Set(['get', 'findOne', 'find', 'findOneAndUpdate', 'findOneAndDelete']);
 
-export function injectTypes(ast: File): File {
+export function injectTypes(ast: File, options: TransformOptions = {}): File {
+  const { discordCompat = false } = options;
+
   traverse(ast, {
     VariableDeclarator(path: NodePath<t.VariableDeclarator>) {
       const { id, init } = path.node;
@@ -142,8 +145,9 @@ export function injectTypes(ast: File): File {
     },
 
     CallExpression(path: NodePath<t.CallExpression>) {
-      // discord.js addFields — cast inline objects to any
+      // discord.js addFields — cast inline objects to any (opt-in)
       if (
+        discordCompat &&
         t.isMemberExpression(path.node.callee) &&
         t.isIdentifier(path.node.callee.property, { name: 'addFields' })
       ) {
@@ -152,8 +156,9 @@ export function injectTypes(ast: File): File {
         );
       }
 
-      // cast .get(), .findOne(), etc. to any to prevent strict mode issues
+      // cast .get(), .findOne(), etc. to any to prevent strict mode issues (opt-in)
       if (
+        discordCompat &&
         t.isMemberExpression(path.node.callee) &&
         t.isIdentifier(path.node.callee.property)
       ) {
@@ -177,8 +182,9 @@ export function injectTypes(ast: File): File {
         }
       }
 
-      // fix setColor('string') -> setColor('string' as any)
+      // discord.js setColor('string') -> setColor('string' as any) (opt-in)
       if (
+        discordCompat &&
         t.isMemberExpression(path.node.callee) &&
         t.isIdentifier(path.node.callee.property, { name: 'setColor' })
       ) {
@@ -187,8 +193,9 @@ export function injectTypes(ast: File): File {
         );
       }
 
-      // fix setStyle('Primary') -> setStyle(ButtonStyle.Primary) or as any
+      // discord.js setStyle('Primary') -> setStyle(ButtonStyle.Primary) (opt-in)
       if (
+        discordCompat &&
         t.isMemberExpression(path.node.callee) &&
         t.isIdentifier(path.node.callee.property, { name: 'setStyle' })
       ) {

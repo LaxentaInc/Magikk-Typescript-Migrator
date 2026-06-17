@@ -27,6 +27,7 @@ export type {
   MigrationReport,
   JSDocInfo,
   CliArgs,
+  TransformOptions,
 } from './types';
 
 import { codeToAST } from './parser';
@@ -36,7 +37,7 @@ import { astToCode } from './generator';
 
 // convenience function, runs the full babel pipeline on a single code string
 // does not run ts-morph or eslint (those need file paths)
-export function migrateCode(code: string, options: { isReact?: boolean; filePath?: string } = {}): { code: string; errors: string[] } {
+export function migrateCode(code: string, options: { isReact?: boolean; filePath?: string; discordCompat?: boolean } = {}): { code: string; errors: string[] } {
   const { ast, errors: parseErrors } = codeToAST(code, options);
   if (!ast) {
     return { code, errors: parseErrors.map(e => e.message) };
@@ -51,7 +52,7 @@ export function migrateCode(code: string, options: { isReact?: boolean; filePath
   }
 
   try {
-    injectTypes(ast);
+    injectTypes(ast, { discordCompat: options.discordCompat });
   } catch (err: unknown) {
     return { code, errors: [`transform failed: ${err instanceof Error ? err.message : String(err)}`] };
   }

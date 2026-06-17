@@ -3,29 +3,29 @@
 import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
+import { Command } from 'commander';
+import fg from 'fast-glob';
+import pc from 'picocolors';
 import { codeToAST } from './parser';
 import { convertModuleSystem } from './converter';
 import { injectTypes } from './transformer';
 import { astToCode } from './generator';
 import { refineTypes } from './refiner';
 import { runLintFix } from './postprocess';
-import type { MigrationResult, MigrationReport, CliArgs } from './types';
+import type { MigrationResult, MigrationReport } from './types';
 
-const C = {
-  reset:   '\x1b[0m',
-  bold:    '\x1b[1m',
-  dim:     '\x1b[2m',
-  red:     '\x1b[31m',
-  green:   '\x1b[32m',
-  yellow:  '\x1b[33m',
-  blue:    '\x1b[34m',
-  magenta: '\x1b[35m',
-  cyan:    '\x1b[36m',
-  white:   '\x1b[37m',
-};
+// read version from package.json at build time
+const PKG_VERSION: string = (() => {
+  try {
+    const pkgPath = path.resolve(__dirname, '..', 'package.json');
+    return JSON.parse(fs.readFileSync(pkgPath, 'utf-8')).version;
+  } catch {
+    return '0.0.0';
+  }
+})();
 
 const BANNER = `
-${C.magenta}${C.bold}
+${pc.magenta(pc.bold(`
     ╔══════════════════════════════════════════════════════════╗
     ║                                                          ║
     ║    M T S   M I G R A T O R                               ║
@@ -34,61 +34,40 @@ ${C.magenta}${C.bold}
     ║   by laxenta inc — https://colorwall.xyz                 ║
     ║                                                          ║
     ╚══════════════════════════════════════════════════════════╝
-${C.reset}`;
+`))}`;
 
 const LOG = {
-  info:    (...args: unknown[]) => console.log(`${C.cyan}[INFO]${C.reset}`, ...args),
-  success: (...args: unknown[]) => console.log(`${C.green}[✓]${C.reset}`, ...args),
-  warn:    (...args: unknown[]) => console.log(`${C.yellow}[⚠]${C.reset}`, ...args),
-  error:   (...args: unknown[]) => console.log(`${C.red}[✗]${C.reset}`, ...args),
-  step:    (...args: unknown[]) => console.log(`${C.magenta}[→]${C.reset}`, ...args),
-  detail:  (...args: unknown[]) => console.log(`${C.dim}   ${C.reset}`, ...args),
+  info:    (...args: unknown[]) => console.log(`${pc.cyan('[INFO]')}`, ...args),
+  success: (...args: unknown[]) => console.log(`${pc.green('[✓]')}`, ...args),
+  warn:    (...args: unknown[]) => console.log(`${pc.yellow('[⚠]')}`, ...args),
+  error:   (...args: unknown[]) => console.log(`${pc.red('[✗]')}`, ...args),
+  step:    (...args: unknown[]) => console.log(`${pc.magenta('[→]')}`, ...args),
+  detail:  (...args: unknown[]) => console.log(`${pc.dim('   ')}`, ...args),
 };
 
-const IGNORE_DIRS = new Set([
+const IGNORE_DIRS = [
   'node_modules', '.git', 'dist', 'build', '.next',
   'coverage', '.nyc_output', '__pycache__', '.cache',
   'mts-migrator',
-]);
+];
 
 const IGNORE_FILES = new Set([
   'babel.config.js', '.eslintrc.js', 'jest.config.js',
   'webpack.config.js', 'rollup.config.js', 'vite.config.js',
   'tailwind.config.js', 'postcss.config.js', 'next.config.js',
+  'babel.config.cjs', '.eslintrc.cjs', 'jest.config.cjs',
+  'webpack.config.cjs', 'rollup.config.cjs', 'vite.config.cjs',
+  'tailwind.config.cjs', 'postcss.config.cjs', 'next.config.cjs',
+  'babel.config.mjs', '.eslintrc.mjs', 'jest.config.mjs',
+  'webpack.config.mjs', 'rollup.config.mjs', 'vite.config.mjs',
+  'tailwind.config.mjs', 'postcss.config.mjs', 'next.config.mjs',
 ]);
-
-function parseArgs(): CliArgs {
-  const args = process.argv.slice(2);
-  let target = '';
-  let dryRun = false;
-  let skipRefine = false;
-  let skipLint = false;
-
-  for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--target' && args[i + 1]) {
-      target = args[++i];
-    } else if (args[i] === '--dry-run') {
-      dryRun = true;
-    } else if (args[i] === '--no-refine') {
-      skipRefine = true;
-    } else if (args[i] === '--no-lint') {
-      skipLint = true;
-    } else if (args[i] === '--help' || args[i] === '-h') {
-      printHelp();
-      process.exit(0);
-    } else if (!args[i].startsWith('--')) {
-      target = args[i];
-    }
-  }
-
-  return { target, dryRun, skipRefine, skipLint };
-}
 
 function findTargetDir(baseDir: string, targetName: string): string | null {
   try {
     const entries = fs.readdirSync(baseDir, { withFileTypes: true });
     for (const entry of entries) {
-      if (entry.isDirectory() && !IGNORE_DIRS.has(entry.name)) {
+      if (entry.isDirectory() && !IGNORE_DIRS.includes(entry.name)) {
         if (entry.name === targetName) {
           return path.join(baseDir, entry.name);
         }
@@ -96,63 +75,40 @@ function findTargetDir(baseDir: string, targetName: string): string | null {
         if (found) return found;
       }
     }
-  } catch (e) {
-    //ignore read errors
+  } catch {
+    // ignore read errors
   }
   return null;
 }
 
-function printHelp(): void {
-  console.log(`
-${C.bold}mts-migrator${C.reset} — js to ts migration engine
-
-${C.bold}usage:${C.reset}
-  mts [target] [options]
-  pnpm mts [target] [options]
-  npx mts-migrator [target] [options]
-
-${C.bold}options:${C.reset}
-  --target <dir>   target folder name or path and thats it and it will run on it!
-  --dry-run        preview changes without writing files
-  --no-refine      skip ts-morph type refinement pass
-  --no-lint        skip eslint --fix post-processing
-  -h, --help       show this help
-
-${C.bold}examples:${C.reset}
-  *if you do not use pnpm, use npm instead of it idk*
-
-  pnpm mts (Just do this command if your are confused; migrates the whole working folder!)
-
-  pnpm mts components (targets the folder named components)
-
-  pnpm mts --target utils --dry-run (preview changes without writing files)
-
-  npx mts-migrator src --no-refine --no-lint (skip eslint --fix post-processing)
-`);
+// resolve the correct ts extension for a given js file
+function getTsExtension(filePath: string): string {
+  if (filePath.endsWith('.jsx')) return '.tsx';
+  if (filePath.endsWith('.mjs')) return '.mts';
+  if (filePath.endsWith('.cjs')) return '.cts';
+  return '.ts';
 }
 
-function walkSync(dir: string, filelist: string[] = []): string[] {
-  if (!fs.existsSync(dir)) return filelist;
+// find js files using fast-glob instead of hand-rolled recursion
+function findJsFiles(dir: string): string[] {
+  const ignorePatterns = IGNORE_DIRS.map(d => `**/${d}/**`);
 
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      if (!IGNORE_DIRS.has(entry.name)) walkSync(fullPath, filelist);
-    } else if (entry.isFile()) {
-      filelist.push(fullPath);
-    }
-  }
+  const files = fg.sync('**/*.{js,jsx,mjs,cjs}', {
+    cwd: dir,
+    absolute: true,
+    ignore: ignorePatterns,
+    dot: false,
+    onlyFiles: true,
+  });
 
-  return filelist;
+  return files;
 }
 
-function migrateFile(filePath: string, backupDir: string, dryRun: boolean): MigrationResult {
+function migrateFile(filePath: string, backupDir: string, dryRun: boolean, discord: boolean): MigrationResult {
   const fileName = path.basename(filePath);
   const relativePath = path.relative(process.cwd(), filePath);
-  const isJsx = filePath.endsWith('.jsx');
-  const tsExt = isJsx ? '.tsx' : '.ts';
-  const tsFilePath = filePath.replace(/\.jsx?$/, tsExt);
+  const tsExt = getTsExtension(filePath);
+  const tsFilePath = filePath.replace(/\.(js|jsx|mjs|cjs)$/, tsExt);
 
   const result: MigrationResult = {
     source: relativePath,
@@ -168,7 +124,7 @@ function migrateFile(filePath: string, backupDir: string, dryRun: boolean): Migr
     if (tsContent.length > 0) {
       result.status = 'skipped-existing';
       result.warnings.push('ts file already exists with content');
-      LOG.warn(`skipping ${C.yellow}${fileName}${C.reset} — ts dupe exists`);
+      LOG.warn(`skipping ${pc.yellow(fileName)} — ts dupe exists`);
       return result;
     }
     LOG.detail(`existing ${tsExt} is empty, overwriting`);
@@ -177,7 +133,7 @@ function migrateFile(filePath: string, backupDir: string, dryRun: boolean): Migr
   // skip config files
   if (IGNORE_FILES.has(fileName)) {
     result.status = 'skipped-config';
-    LOG.warn(`skipping config file ${C.yellow}${fileName}${C.reset}`);
+    LOG.warn(`skipping config file ${pc.yellow(fileName)}`);
     return result;
   }
 
@@ -204,7 +160,8 @@ function migrateFile(filePath: string, backupDir: string, dryRun: boolean): Migr
   }
 
   // step 1: parse
-  LOG.step(`parsing ${C.cyan}${fileName}${C.reset}`);
+  const isJsx = filePath.endsWith('.jsx');
+  LOG.step(`parsing ${pc.cyan(fileName)}`);
   const { ast, errors: parseErrors } = codeToAST(rawCode, { isReact: isJsx, filePath });
 
   if (!ast) {
@@ -221,7 +178,7 @@ function migrateFile(filePath: string, backupDir: string, dryRun: boolean): Migr
   }
 
   // step 2: convert module system
-  LOG.step(`converting ${C.cyan}${fileName}${C.reset} module system`);
+  LOG.step(`converting ${pc.cyan(fileName)} module system`);
   try {
     convertModuleSystem(ast);
   } catch (err: unknown) {
@@ -231,9 +188,9 @@ function migrateFile(filePath: string, backupDir: string, dryRun: boolean): Migr
   }
 
   // step 3: inject types
-  LOG.step(`transforming ${C.cyan}${fileName}${C.reset}`);
+  LOG.step(`transforming ${pc.cyan(fileName)}`);
   try {
-    injectTypes(ast);
+    injectTypes(ast, { discordCompat: discord });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     result.status = 'error-transform';
@@ -243,7 +200,7 @@ function migrateFile(filePath: string, backupDir: string, dryRun: boolean): Migr
   }
 
   // step 4: generate output
-  LOG.step(`generating ${C.cyan}${path.basename(tsFilePath)}${C.reset}`);
+  LOG.step(`generating ${pc.cyan(path.basename(tsFilePath))}`);
   let outputCode: string;
   try {
     outputCode = astToCode(ast);
@@ -258,14 +215,14 @@ function migrateFile(filePath: string, backupDir: string, dryRun: boolean): Migr
   // step 5: write the ts file (unless dry run)
   if (dryRun) {
     result.status = 'migrated';
-    LOG.success(`${C.green}${fileName}${C.reset} → ${C.bold}${path.basename(tsFilePath)}${C.reset} ${C.dim}(dry run)${C.reset}`);
+    LOG.success(`${pc.green(fileName)} → ${pc.bold(path.basename(tsFilePath))} ${pc.dim('(dry run)')}`);
     return result;
   }
 
   try {
     fs.writeFileSync(tsFilePath, outputCode, 'utf-8');
     result.status = 'migrated';
-    LOG.success(`${C.green}${fileName}${C.reset} → ${C.bold}${path.basename(tsFilePath)}${C.reset}`);
+    LOG.success(`${pc.green(fileName)} → ${pc.bold(path.basename(tsFilePath))}`);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     result.status = 'error-write';
@@ -277,9 +234,38 @@ function migrateFile(filePath: string, backupDir: string, dryRun: boolean): Migr
 }
 
 async function run(): Promise<void> {
-  console.log(BANNER);
+  const program = new Command();
 
-  const { target: rawTarget, dryRun, skipRefine, skipLint } = parseArgs();
+  program
+    .name('mts')
+    .description('js → ts migration engine by laxenta inc')
+    .version(PKG_VERSION, '-v, --version')
+    .argument('[target]', 'target folder name or path to migrate')
+    .option('--target <dir>', 'target folder name or path (alternative syntax)')
+    .option('--dry-run', 'preview changes without writing files', false)
+    .option('--no-refine', 'skip ts-morph type refinement pass')
+    .option('--no-lint', 'skip eslint --fix post-processing')
+    .option('--discord', 'enable discord.js-specific transforms (setColor, setStyle, addFields casts)', false)
+    .addHelpText('after', `
+${pc.bold('examples:')}
+  pnpm mts                                         migrate the whole working folder
+  pnpm mts components                               target the folder named "components"
+  pnpm mts --target utils --dry-run                  preview changes without writing
+  npx mts-migrator src --no-refine --no-lint         skip refinement and linting
+  pnpm mts src --discord                             enable discord.js compat transforms
+`);
+
+  program.parse(process.argv);
+
+  const opts = program.opts();
+  const positionalTarget = program.args[0] || '';
+  const rawTarget = opts.target || positionalTarget;
+  const dryRun: boolean = opts.dryRun;
+  const skipRefine: boolean = !opts.refine;
+  const skipLint: boolean = !opts.lint;
+  const discord: boolean = opts.discord;
+
+  console.log(BANNER);
 
   let targetDir = '';
 
@@ -291,7 +277,7 @@ async function run(): Promise<void> {
     
     const topLevelFolder = path.basename(process.cwd());
     const answer = await new Promise<string>(resolve => {
-      rl.question(`${C.yellow}[?]${C.reset} Heyyyy Welcome! Anyways, do you want to perform the action inside every folder inside [${topLevelFolder}]? (Y/n) `, resolve);
+      rl.question(`${pc.yellow('[?]')} Heyyyy Welcome! Anyways, do you want to perform the action inside every folder inside [${topLevelFolder}]? (Y/n) `, resolve);
     });
     rl.close();
 
@@ -299,8 +285,7 @@ async function run(): Promise<void> {
     if (lowerAnswer === '' || lowerAnswer === 'y' || lowerAnswer === 'yes') {
       targetDir = process.cwd();
     } else {
-      printHelp();
-      process.exit(0);
+      program.help();
     }
   } else {
     if (fs.existsSync(path.resolve(process.cwd(), rawTarget))) {
@@ -309,7 +294,7 @@ async function run(): Promise<void> {
       const found = findTargetDir(process.cwd(), rawTarget);
       if (found) {
         targetDir = found;
-        LOG.info(`found matching folder: ${C.bold}${targetDir}${C.reset}`);
+        LOG.info(`found matching folder: ${pc.bold(targetDir)}`);
       } else {
         LOG.error(`could not find any folder named "${rawTarget}"`);
         process.exit(1);
@@ -320,9 +305,10 @@ async function run(): Promise<void> {
   const backupDir = path.resolve(process.cwd(), 'mts-migrator/backups', new Date().toISOString().replace(/[:.]/g, '-'));
   const reportPath = path.resolve(process.cwd(), 'mts-migrator/migration-report.json');
 
-  LOG.info(`target: ${C.bold}${targetDir}${C.reset}`);
-  LOG.info(`backups: ${C.bold}${backupDir}${C.reset}`);
-  if (dryRun) LOG.info(`${C.yellow}dry run mode — no files will be written${C.reset}`);
+  LOG.info(`target: ${pc.bold(targetDir)}`);
+  LOG.info(`backups: ${pc.bold(backupDir)}`);
+  if (dryRun) LOG.info(pc.yellow('dry run mode — no files will be written'));
+  if (discord) LOG.info(pc.cyan('discord.js compat transforms enabled'));
   LOG.info('');
 
   if (!fs.existsSync(targetDir)) {
@@ -332,12 +318,11 @@ async function run(): Promise<void> {
 
   if (!dryRun) fs.mkdirSync(backupDir, { recursive: true });
 
-  const allFiles = walkSync(targetDir);
-  const jsFiles = allFiles.filter(f => f.endsWith('.js') || f.endsWith('.jsx'));
+  const jsFiles = findJsFiles(targetDir);
 
-  LOG.info(`found ${C.bold}${jsFiles.length}${C.reset} javascript files to process`);
+  LOG.info(`found ${pc.bold(String(jsFiles.length))} javascript files to process`);
   LOG.info('');
-  LOG.info(`${C.magenta}═══════════════════════════════════════════${C.reset}`);
+  LOG.info(pc.magenta('═══════════════════════════════════════════'));
   LOG.info('');
 
   const results: MigrationResult[] = [];
@@ -346,8 +331,8 @@ async function run(): Promise<void> {
   for (let i = 0; i < jsFiles.length; i++) {
     const file = jsFiles[i];
     const progress = `[${i + 1}/${jsFiles.length}]`;
-    LOG.info(`${C.dim}${progress}${C.reset} processing ${C.cyan}${path.relative(targetDir, file)}${C.reset}`);
-    results.push(migrateFile(file, backupDir, dryRun));
+    LOG.info(`${pc.dim(progress)} processing ${pc.cyan(path.relative(targetDir, file))}`);
+    results.push(migrateFile(file, backupDir, dryRun, discord));
     console.log('');
   }
 
@@ -360,13 +345,13 @@ async function run(): Promise<void> {
   let totalRefined = 0;
   if (!dryRun && !skipRefine && migratedFiles.length > 0) {
     LOG.info('');
-    LOG.info(`${C.magenta}═══════════════════════════════════════════${C.reset}`);
+    LOG.info(pc.magenta('═══════════════════════════════════════════'));
     LOG.step(`refining types with ts-morph (${migratedFiles.length} files)...`);
 
     const refined = refineTypes(migratedFiles, targetDir);
     for (const [filePath, count] of refined) {
       const rel = path.relative(targetDir, filePath);
-      LOG.success(`refined ${C.bold}${count}${C.reset} types in ${C.cyan}${rel}${C.reset}`);
+      LOG.success(`refined ${pc.bold(String(count))} types in ${pc.cyan(rel)}`);
       totalRefined += count;
 
       // update the matching result
@@ -377,7 +362,7 @@ async function run(): Promise<void> {
     if (totalRefined === 0) {
       LOG.detail('no types could be further refined');
     } else {
-      LOG.success(`${C.bold}${totalRefined}${C.reset} total types refined`);
+      LOG.success(`${pc.bold(String(totalRefined))} total types refined`);
     }
   }
 
@@ -399,13 +384,13 @@ async function run(): Promise<void> {
   const errors = results.filter(r => r.status.startsWith('error')).length;
 
   console.log('');
-  LOG.info(`${C.magenta}═══════════════════════════════════════════${C.reset}`);
+  LOG.info(pc.magenta('═══════════════════════════════════════════'));
   console.log('');
-  LOG.info(`${C.bold}migration complete!${C.reset} (${elapsed}s)`);
-  LOG.info(`  ${C.green}✓ migrated:${C.reset} ${migrated}`);
-  LOG.info(`  ${C.yellow}⚠ skipped:${C.reset}  ${skipped}`);
-  LOG.info(`  ${C.red}✗ errors:${C.reset}   ${errors}`);
-  if (totalRefined > 0) LOG.info(`  ${C.blue}⬆ refined:${C.reset} ${totalRefined} types`);
+  LOG.info(`${pc.bold('migration complete!')} (${elapsed}s)`);
+  LOG.info(`  ${pc.green('✓ migrated:')} ${migrated}`);
+  LOG.info(`  ${pc.yellow('⚠ skipped:')}  ${skipped}`);
+  LOG.info(`  ${pc.red('✗ errors:')}   ${errors}`);
+  if (totalRefined > 0) LOG.info(`  ${pc.blue('⬆ refined:')} ${totalRefined} types`);
   if (!dryRun) LOG.info(`  backups:  ${backupDir}`);
 
   if (!dryRun) {
@@ -433,7 +418,7 @@ async function run(): Promise<void> {
     LOG.warn(`${errors} file(s) had errors. check the report for details.`);
     LOG.warn(`original .js files are untouched — .ts files are new additions.`);
   }
-  LOG.info(`${C.magenta}${C.bold}mts migration complete ✨${C.reset}`);
+  LOG.info(pc.magenta(pc.bold('mts migration complete ✨')));
   console.log('');
 }
 

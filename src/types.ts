@@ -65,6 +65,12 @@ export interface JSDocInfo {
   returnType: TSType | null;
 }
 
+// -- transform options --
+
+export interface TransformOptions {
+  discordCompat?: boolean;
+}
+
 // -- cli types --
 
 export interface CliArgs {
@@ -72,4 +78,5 @@ export interface CliArgs {
   dryRun: boolean;
   skipRefine: boolean;
   skipLint: boolean;
+  discord: boolean;
 }

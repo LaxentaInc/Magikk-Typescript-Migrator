@@ -4,3 +4,4 @@ backups/
 migration-report.json
 mts-migrator/
 *.tsbuildinfo
+package-lock.json

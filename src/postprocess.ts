@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { execFileSync, execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 
@@ -16,8 +16,7 @@ export function runLintFix(filePaths: string[], targetDir: string): boolean {
     const batchSize = 50;
     for (let i = 0; i < filePaths.length; i += batchSize) {
       const batch = filePaths.slice(i, i + batchSize);
-      const files = batch.map(f => `"${f}"`).join(' ');
-      execSync(`${eslintBin} --fix --no-error-on-unmatched-pattern ${files}`, {
+      execFileSync(eslintBin, ['--fix', '--no-error-on-unmatched-pattern', ...batch], {
         cwd: targetDir,
         stdio: 'ignore',
         timeout: 60000,
@@ -35,14 +34,15 @@ function findEslint(dir: string): string | null {
   const localBin = path.join(dir, 'node_modules', '.bin', 'eslint');
   const localBinCmd = localBin + '.cmd';
 
-  if (fs.existsSync(localBinCmd)) return `"${localBinCmd}"`;
-  if (fs.existsSync(localBin)) return `"${localBin}"`;
+  if (process.platform === 'win32' && fs.existsSync(localBinCmd)) return localBinCmd;
+  if (fs.existsSync(localBin)) return localBin;
 
   // check if npx eslint would work (eslint installed globally)
   try {
     execSync('npx --no eslint --version', { cwd: dir, stdio: 'ignore', timeout: 5000 });
-    return 'npx --no eslint';
+    return 'eslint';
   } catch {
     return null;
   }
 }
+

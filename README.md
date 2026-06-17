@@ -55,7 +55,15 @@ pnpm mts src --no-refine
 ```bash
 # skip `eslint --fix` post-processing  
 pnpm mts src --no-lint
-
+```
+```bash
+# enable discord.js-specific transforms (setColor, setStyle, addFields casts)
+pnpm mts src --discord
+```
+```bash
+# show version
+pnpm mts --version
+```
 ```bash
 # show help
 pnpm mts --help
@@ -64,8 +72,8 @@ pnpm mts --help
 ## what it does
 
 ```
-.js file → parse (babel) → convert modules → inject types → generate .ts
-         → refine types (ts-morph) → eslint --fix → done
+.js/.jsx/.mjs/.cjs → parse (babel) → convert modules → inject types → generate .ts/.tsx/.mts/.cts
+                    → refine types (ts-morph) → eslint --fix → done
 ```
 
 ### module conversion
@@ -88,6 +96,13 @@ pnpm mts --help
 ### type refinement (ts-morph)
 after the initial babel pass, ts-morph uses the typescript compiler to replace `any` annotations with actually-inferred types where possible.
 
+### discord.js compat (opt-in)
+pass `--discord` to enable discord.js-specific transforms:
+- `setColor('string')` → `setColor('string' as any)`
+- `setStyle('Primary')` → `setStyle(ButtonStyle.Primary)`
+- `.addFields({...})` → `.addFields({...} as any)`
+- `.get()`, `.findOne()`, etc. → `as any` casts
+
 ### eslint integration
 if eslint is installed in your project, `mts` will run `eslint --fix` on the migrated files automatically. if not, it skips silently.
 
@@ -98,6 +113,9 @@ import { migrateCode, codeToAST, injectTypes, convertModuleSystem } from 'mts-mi
 
 // quick: convert a code string
 const { code, errors } = migrateCode('const x = require("fs");');
+
+// with discord.js compat
+const { code: discordCode } = migrateCode(jsCode, { discordCompat: true });
 
 // granular: use individual steps
 const { ast } = codeToAST(jsCode);
@@ -113,6 +131,7 @@ const tsCode = astToCode(ast);
 - **error recovery**: non-fatal parse errors don't block migration
 - **migration report**: json report with per-file status
 - **config skip**: automatically skips config files (webpack, babel, eslint, etc.)
+- **.mjs/.cjs support**: handles all javascript file extensions
 
 ## what it doesn't do
 
